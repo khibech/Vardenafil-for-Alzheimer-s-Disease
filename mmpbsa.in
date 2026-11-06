@@ -1,0 +1,15 @@
+&general
+  startframe = 1,
+  endframe   = 251,
+  interval   = 1,
+  verbose    = 1,
+  keep_files = 0,
+/
+
+&pb
+  istrng = 0.15,
+/
+
+&decomp
+  idecomp = 1,
+/

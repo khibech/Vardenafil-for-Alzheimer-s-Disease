@@ -1,0 +1,56 @@
+title                   = Protein-ligand complex MD simulation - 800 ns
+
+; Run parameters
+integrator              = md
+nsteps                  = 400000000     ; 800 ns
+dt                      = 0.002         ; 2 fs
+
+; Output control
+nstenergy               = 5000          ; energies every 10 ps
+nstlog                  = 5000          ; log every 10 ps
+nstxout-compressed      = 50001         ; coordinates every 100.002 ps = 8000 frames including the initial frame
+
+; Bond parameters
+continuation            = yes
+constraint_algorithm    = lincs
+constraints             = h-bonds
+lincs_iter              = 2
+lincs_order             = 6
+
+; Neighbor searching and vdW
+cutoff-scheme           = Verlet
+nstlist                 = 20
+rlist                   = 1.2
+
+vdwtype                 = cutoff
+vdw-modifier            = force-switch
+rvdw-switch             = 1.0
+rvdw                    = 1.2
+
+; Electrostatics
+coulombtype             = PME
+rcoulomb                = 1.2
+pme_order               = 4
+fourierspacing          = 0.16
+
+; Temperature coupling
+tcoupl                  = V-rescale
+tc-grps                 = Protein_LIG Water_and_ions
+tau_t                   = 0.1   0.1
+ref_t                   = 300   300
+
+; Pressure coupling
+pcoupl                  = Parrinello-Rahman
+pcoupltype              = isotropic
+tau_p                   = 2.0
+ref_p                   = 1.0
+compressibility         = 4.5e-5
+
+; Periodic boundary conditions
+pbc                     = xyz
+
+; Dispersion correction
+DispCorr                = no
+
+; Velocity generation
+gen_vel                 = no
